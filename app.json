@@ -1,4 +1,5 @@
 {
   "name": "eCommerce",
-  "displayName": "eCommerce"
+  "displayName": "eCommerce",
+  "api": "https://reqres.in"
 }
