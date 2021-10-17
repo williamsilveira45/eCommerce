@@ -10,11 +10,12 @@ import HomeNavigation from './HomeNavigation';
 import {TAB_HEIGHT, TAB_HEIGHT_DEVICE_NOTCH} from '../assets/functions';
 import CartNavigation from './CartNavigation';
 import {Badge} from 'react-native-elements';
+import {connect} from 'react-redux';
 
 const Tab = createBottomTabNavigator();
 const deviceNotch = DeviceInfo.hasNotch();
 
-export default class AppTabNavigation extends React.Component {
+class AppTabNavigation extends React.Component {
   constructor() {
     super();
   }
@@ -53,7 +54,13 @@ export default class AppTabNavigation extends React.Component {
             tabBarIcon: ({color, size}) => (
               <>
                 <Feather name="shopping-cart" size={28} color={color} />
-                <Badge status="primary" value={1} containerStyle={{ position: 'absolute', top: -1, right: 40 }} />
+                {this.props.cart.length > 0 ? (
+                  <Badge
+                    status="primary"
+                    value={this.props.cart.length}
+                    containerStyle={{position: 'absolute', top: -1, right: 40}}
+                  />
+                ) : null}
               </>
             ),
           }}
@@ -72,3 +79,14 @@ export default class AppTabNavigation extends React.Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    cart: state.Cart.products,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppTabNavigation);

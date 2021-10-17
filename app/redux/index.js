@@ -4,10 +4,14 @@ import {createLogger} from 'redux-logger';
 import {persistStore, persistReducer} from 'redux-persist';
 import Network from './network';
 import Auth from './auth';
+import Products from './products';
+import Cart from './cart';
 
 const rootReducer = combineReducers({
   Network: Network,
   Auth: Auth,
+  Products: Products,
+  Cart: Cart,
 });
 
 const persistConfig = {
@@ -17,7 +21,7 @@ const persistConfig = {
   // Whitelist (Save Specific Reducers)
   whitelist: ['Auth'],
   // Blacklist (Don't Save Specific Reducers)
-  blacklist: ['Network'],
+  blacklist: ['Network', 'Products', 'Cart'],
 };
 // Middleware: Redux Persist Persisted Reducer
 const persistedReducer = persistReducer(persistConfig, rootReducer);
