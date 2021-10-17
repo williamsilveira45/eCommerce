@@ -18,6 +18,7 @@ import Separator from '../../components/Separator';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
+import RNHTMLtoPDF from 'react-native-html-to-pdf';
 
 class Cart extends React.Component {
   constructor(props) {
@@ -28,16 +29,65 @@ class Cart extends React.Component {
     };
   }
 
-  checkout() {
+  async checkout() {
     if (this.state.loading) {
       return;
     }
 
+    this.setState({loading: true});
+    try {
+      const date = moment().format('DD/MM/YYYY HH:mm:ss');
+      let total = 0;
+      let htmlContent = '<html><head></head><body style="margin:5px;padding:15px;">';
+      htmlContent += `<h3>eCommerce - Pedido em ${date}</h3>`;
+      htmlContent += '<hr />';
+      htmlContent += '<table width="100%" border="0" cellpadding="1" cellspacing="1">';
+      htmlContent += '  <thead>';
+      htmlContent += '    <tr>';
+      htmlContent += '      <th align="left">Produto</th>';
+      htmlContent += '      <th align="left">Unidade</th>';
+      htmlContent += '      <th align="left">Peso / Qtd</th>';
+      htmlContent += '      <th align="left">Preço Unit.</th>';
+      htmlContent += '      <th align="right">Total</th>';
+      htmlContent += '    </tr>';
+      htmlContent += '  </thead>';
+      htmlContent += '  <tbody>';
+      this.props.cart.forEach(prod => {
+        htmlContent += '    <tr>';
+        htmlContent += `      <td>${prod.name}</td>`;
+        htmlContent += `      <td>${prod.unit === 'kg' ? 'KG' : 'Unidade'}</td>`;
+        htmlContent += `      <td>${prod.unit === 'kg' ? prod.qty.toFixed(2) + 'KG' : prod.qty}</td>`;
+        htmlContent += `      <td>${currencyFormat(prod.price)}</td>`;
+        htmlContent += `      <td align="right">${currencyFormat(prod.totalPrice)}</td>`;
+        htmlContent += '    </tr>';
+        total += prod.totalPrice;
+      });
+      htmlContent += '    <tr>';
+      htmlContent += `      <td align="right" colspan="5"><b>${currencyFormat(total)}</b></td>`;
+      htmlContent += '    </tr>';
+      htmlContent += '  </tbody>';
+      htmlContent += '</table>';
+      htmlContent += `</body></html>`;
 
-    const date = moment().format('DD/MM/YYYY HH:mm:ss');
-
-    let htmlContent = '<html><head></head><body style="margin:0;padding:0;">';
-    htmlContent += `<h3>eCommerce - Pedido em ${date}</h3>`;
+      const options = {
+        html: htmlContent,
+        fileName: 'pdfCheckout',
+      };
+      const htmlToPdf = await RNHTMLtoPDF.convert(options);
+      console.log(htmlToPdf);
+      if (htmlToPdf?.filePath) {
+        this.props.navigation.navigate('PDFViewer', {
+          pdf: {
+            name: options.fileName,
+            path: htmlToPdf.filePath,
+          },
+        });
+        this.props.clearCart();
+      }
+    } catch (e) {
+      Alert.alert(e.message);
+    }
+    this.setState({loading: false});
   }
 
   getTotalValue() {
@@ -106,6 +156,33 @@ class Cart extends React.Component {
     );
   }
 
+  renderRightButton() {
+    if (this.props.cart.length < 1) {
+      return;
+    }
+
+    return (
+      <TouchableOpacity disabled={this.loading} onPress={() => this.checkout()}>
+        {this.state.loading ? (
+          <ActivityIndicator size="small" color={colors.greenColor} />
+        ) : (
+          <Text
+            style={{
+              color: colors.greenColor,
+            }}>
+            Finalizar
+            {'  '}
+            <FontAwesome5Icon
+              name="check"
+              size={15}
+              color={colors.greenColor}
+            />
+          </Text>
+        )}
+      </TouchableOpacity>
+    );
+  }
+
   render() {
     return (
       <>
@@ -121,28 +198,7 @@ class Cart extends React.Component {
             </TouchableOpacity>
           }
           centerComponent={<Text style={{fontSize: 18}}>Carrinho</Text>}
-          rightComponent={
-            <TouchableOpacity
-              disabled={this.loading}
-              onPress={() => this.checkout()}>
-              {this.state.loading ? (
-                <ActivityIndicator size="small" color={colors.greenColor} />
-              ) : (
-                <Text
-                  style={{
-                    color: colors.greenColor,
-                  }}>
-                  Finalizar
-                  {'  '}
-                  <FontAwesome5Icon
-                    name="check"
-                    size={15}
-                    color={colors.greenColor}
-                  />
-                </Text>
-              )}
-            </TouchableOpacity>
-          }
+          rightComponent={() => this.renderRightButton()}
         />
         <View style={styles.container}>
           <View style={styles.valueContainer}>

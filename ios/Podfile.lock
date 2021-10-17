@@ -258,6 +258,10 @@ PODS:
     - React-Core
   - react-native-pdf (6.3.0):
     - React-Core
+  - react-native-progress-bar-android (1.0.4):
+    - React
+  - react-native-progress-view (1.3.1):
+    - React-Core
   - react-native-safe-area-context (3.3.2):
     - React-Core
   - React-perflogger (0.64.2)
@@ -324,6 +328,8 @@ PODS:
     - React-cxxreact (= 0.64.2)
     - React-jsi (= 0.64.2)
     - React-perflogger (= 0.64.2)
+  - rn-fetch-blob (0.12.0):
+    - React-Core
   - RNCAsyncStorage (1.12.1):
     - React-Core
   - RNDeviceInfo (8.4.1):
@@ -379,6 +385,8 @@ DEPENDENCIES:
   - react-native-html-to-pdf (from `../node_modules/react-native-html-to-pdf`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-pdf (from `../node_modules/react-native-pdf`)
+  - "react-native-progress-bar-android (from `../node_modules/@react-native-community/progress-bar-android`)"
+  - "react-native-progress-view (from `../node_modules/@react-native-community/progress-view`)"
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -392,6 +400,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - rn-fetch-blob (from `../node_modules/rn-fetch-blob`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
@@ -451,6 +460,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/netinfo"
   react-native-pdf:
     :path: "../node_modules/react-native-pdf"
+  react-native-progress-bar-android:
+    :path: "../node_modules/@react-native-community/progress-bar-android"
+  react-native-progress-view:
+    :path: "../node_modules/@react-native-community/progress-view"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   React-perflogger:
@@ -477,6 +490,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/runtimeexecutor"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  rn-fetch-blob:
+    :path: "../node_modules/rn-fetch-blob"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-community/async-storage"
   RNDeviceInfo:
@@ -520,6 +535,8 @@ SPEC CHECKSUMS:
   react-native-html-to-pdf: 351e066852eb2613ed1555e4e1799e4a579a3214
   react-native-netinfo: 8917788f12f8c422d16a56f840a1b06faa56e2b6
   react-native-pdf: ef641e79a6d550cfabe5d7ec1916799726514c43
+  react-native-progress-bar-android: ce95a69f11ac580799021633071368d08aaf9ad8
+  react-native-progress-view: 11298da10e13c29bd28042bc0f284d9868f5da18
   react-native-safe-area-context: 5cf05f49df9d17261e40e518481f2e334c6cd4b5
   React-perflogger: 25373e382fed75ce768a443822f07098a15ab737
   React-RCTActionSheet: af7796ba49ffe4ca92e7277a5d992d37203f7da5
@@ -533,6 +550,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: 24600e3b1aaa77126989bc58b6747509a1ba14f3
   React-runtimeexecutor: a9904c6d0218fb9f8b19d6dd88607225927668f9
   ReactCommon: 149906e01aa51142707a10665185db879898e966
+  rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
   RNCAsyncStorage: cb9a623793918c6699586281f0b51cbc38f046f9
   RNDeviceInfo: 1a8db52003ad76c066ed739259079efe5d2e7853
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211

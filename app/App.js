@@ -13,6 +13,7 @@ import {Provider} from 'react-redux';
 import {store} from './redux';
 import {setConnectionStatus} from './redux/network';
 import Login from './pages/Login';
+import PDFViewer from "./pages/PDFViewer";
 
 const Stack = createStackNavigator();
 
@@ -52,6 +53,13 @@ class App extends React.Component {
               <Stack.Screen
                 name="AppNavigation"
                 component={AppTabNavigation}
+                options={{
+                  cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+                }}
+              />
+              <Stack.Screen
+                name="PDFViewer"
+                component={PDFViewer}
                 options={{
                   cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
                 }}
