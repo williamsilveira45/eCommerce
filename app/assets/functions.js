@@ -11,7 +11,13 @@ export function validEmail(email) {
 }
 
 export function currencyFormat(value) {
-  return value
-    .toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})
-    .replace('.', ',');
+  return 'R$ ' + fixedValue(value).toString().replace('.', ',');
+}
+export function fixedValue(value) {
+  if (value) {
+    value = parseFloat(value);
+    return value.toFixed(2);
+  }
+
+  return '0.00';
 }

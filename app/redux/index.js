@@ -19,9 +19,9 @@ const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
   // Whitelist (Save Specific Reducers)
-  whitelist: ['Auth'],
+  whitelist: ['Auth', 'Cart'],
   // Blacklist (Don't Save Specific Reducers)
-  blacklist: ['Network', 'Products', 'Cart'],
+  blacklist: ['Network', 'Products'],
 };
 // Middleware: Redux Persist Persisted Reducer
 const persistedReducer = persistReducer(persistConfig, rootReducer);

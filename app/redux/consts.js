@@ -6,3 +6,4 @@ export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const PRODUCTS_LOAD = 'PRODUCTS_LOAD';
 export const CART_ADD_PRODUCT = 'CART_ADD_PRODUCT';
 export const CART_REMOVE_PRODUCT = 'CART_REMOVE_PRODUCT';
+export const CART_CLEAR = 'CART_CLEAR';

@@ -162,7 +162,7 @@ class Home extends React.Component {
   }
 
   exists(productId) {
-    const exists = this.props.cart.findIndex(prod => productId === prod.id)
+    const exists = this.props.cart.findIndex(prod => productId === prod.id);
     return exists > -1;
   }
 
@@ -206,6 +206,7 @@ class Home extends React.Component {
       price: product.price,
       totalPrice: product.price * qty,
       unit: product.unit,
+      image: product.image,
     });
   }
 
@@ -232,6 +233,7 @@ class Home extends React.Component {
       price: product.price,
       totalPrice: product.price * qty,
       unit: product.unit,
+      image: product.image,
     });
   }
 
@@ -239,11 +241,17 @@ class Home extends React.Component {
     return (
       <>
         <TopHeader
+          leftContainerStyle={{flex: 0.4}}
+          rightContainerStyle={{flex: 0.4}}
+          centerContainerStyle={{flex: 0.2}}
           leftComponent={
-            <TouchableOpacity
-              onPress={() => this.toggleSearch()}>
+            <TouchableOpacity onPress={() => this.toggleSearch()}>
               <Text style={{fontSize: 14, color: colors.primaryColor}}>
-                <FontAwesome5 name="search" color={colors.primaryColor} size={15} />
+                <FontAwesome5
+                  name="search"
+                  color={colors.primaryColor}
+                  size={15}
+                />
                 {'   '}
                 Buscar
               </Text>
@@ -253,7 +261,12 @@ class Home extends React.Component {
           rightComponent={
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate('Cart')}>
-              <Text style={{fontSize: 16, fontWeight: 'bold', color: colors.greenColor}}>
+              <Text
+                style={{
+                  fontSize: 15,
+                  fontWeight: 'bold',
+                  color: colors.greenColor,
+                }}>
                 {this.getTotalValue()}
               </Text>
             </TouchableOpacity>
